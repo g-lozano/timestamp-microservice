@@ -4,8 +4,30 @@ var express = require('express')
 var app = express()
 var port = 8080
 
-function getJSON(unix, natural) {
-    //format date here
+var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
+
+function getJSON(unix, temp_natural) {
+    var natural = null
+    if (unix) {
+        var month = months[temp_natural.getMonth()]
+        var day = Number(temp_natural.toDateString().split(' ')[2])
+        var year = Number(temp_natural.getFullYear())
+
+        natural = month + " " + day + ", " + year
+    }
     return {
         unix: unix,
         natural: natural
